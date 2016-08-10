@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    
+    <!-- Google Fonts Dosis -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Dosis">
+    
+    <!-- Google Fonts Open Sans -->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
+    
+    <!-- Leafet CSS -->
+    <link rel="stylesheet" href="js/libraries/leaflet/leaflet.css" type="text/css" />
+    
+    <!-- Jquery UI autocomplete -->
+    <link rel="stylesheet" href="js/libraries/jquery-ui-autocomplete/jquery-ui.min.css" />
+    
+   <style>
+   
+   html, body{
+   	font-family: 'Open Sans', sans-serif;
+   	width:100%;
+   	margin:0;
+   	padding:0;
+   	overflow-x:hidden;
+   }
+   	
+	
+
+	.button{
+		margin-bottom: 10px;
+		margin-top: 10px;
+		margin-left: 10px;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		padding-left: 14px;
+		padding-right: 14px;
+		text-decoration: none;
+		font-weight: bold;
+		font-size: 14px;
+		line-height: 1.5;
+		text-transform: uppercase;
+		background-color: none;
+		color: black;
+		border: solid 1px black;
+		-webkit-transition: all 500ms ease;
+		-moz-transition: all 500ms ease;
+		-ms-transition: all 500ms ease;
+		transition: all 500ms ease;
+	}
+
+	.button:hover{
+		background-color: black;
+		color:white;
+		text-decoration:none;
+		cursor: pointer;
+	}
+
+	.button:active{
+		color:#2c7fb8;
+		text-decoration:none;
+	}
+	
+	.active-button{
+		color:white;
+		background-color:#2c7fb8;
+		border: solid 1px #2c7fb8;
+	}
+	
+	.active-button:hover{
+		background-color: black;
+		color:white;
+		border: solid 1px black;
+		text-decoration:none;
+		cursor: pointer;
+	
+	}
+	
+	.inline{
+		display:inline;
+	}
+	
+	.margin-top-50{
+		margin-top:50px;
+	}
+	
+	.container{
+		margin-bottom:20px;
+	}
+	
+	
+      
+      	*, *:before, *:after {
+		  -moz-box-sizing: border-box;
+		  -webkit-box-sizing: border-box;
+		  box-sizing: border-box;
+		}
+
+		label {
+		  display: block;
+		  margin-top: 2em;
+		  margin-bottom: 0.5em;
+		  color: #999999;
+		}
+
+		input, select, select, option {
+		  width: 100%;
+		  padding: 0.5em 0.5em;
+		  font-size: 1.2em;
+		  border-radius: 3px;
+		  border: 1px solid #D9D9D9;
+		  background:white;
+		}
+		
+		input[type="text"]{
+		  width: 100%;
+		  padding: 0.5em 0.5em;
+		  font-size: 1.2em;
+		  border-radius: 3px;
+		  border: 1px solid #D9D9D9;
+		  background:white;
+		}
+		
+		input[type="submit"]{
+			width: 100% !important;
+			padding: 0.5em 0.5em;
+			font-size: 1.2em;
+			border-radius: 3px;
+			border: 1px solid #D9D9D9;
+			background: #57BD91;
+		}
+
+
+
+		button {
+		  display: inline-block;
+		  border-radius: 3px;
+		  border: none;
+		  font-size: 20px;
+		  padding: 0.5rem 0.8em;
+		  background: #57BD91;
+		  border-bottom: 1px solid #498b50;
+		  color: white;
+		  -webkit-font-smoothing: antialiased;
+		  font-weight: bold;
+		  margin: 0;
+		  width: 100%;
+		  text-align: center;
+		}
+
+		button:hover, button:focus {
+		  opacity: 0.75;
+		  cursor: pointer;
+		}
+
+		button:active {
+		  opacity: 1;
+		  box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.1) inset;
+		}
+		
+		
+		.button-submit {
+		  display: inline-block;
+		  border-radius: 3px;
+		  border: none;
+		  font-size: 20px;
+		  padding: 0.5rem 0.8em;
+		  background: #57BD91;
+		  border-bottom: 1px solid #498b50;
+		  color: white;
+		  -webkit-font-smoothing: antialiased;
+		  font-weight: bold;
+		  margin: 0;
+		  width: 100%;
+		  text-align: center;
+		}
+
+		.button-submit:hover, .button-submit:focus {
+		  opacity: 0.75;
+		  cursor: pointer;
+		}
+
+		.button-submit:active {
+		  opacity: 1;
+		  box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.1) inset;
+		}
+
+		.success {
+		  width:50%;
+		  margin-left:25%;
+		  margin-right:25%;
+		  padding: 1em;
+		  margin-bottom: 0.75rem;
+		  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+		  color: #468847;
+		  font-size:30px;
+		  text-align:center;
+		  background-color: #dff0d8;
+		  border: 1px solid #d6e9c6;
+		  -webkit-border-radius: 4px;
+			 -moz-border-radius: 4px;
+				  border-radius: 4px;
+		  margin-top:20px;
+		}
+
+		.error {
+		  width:50%;
+		  margin-left:25%;
+		  margin-right:25%;
+		  padding: 1em;
+		  margin-bottom: 0.75rem;
+		  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+		  color: #b94a48;
+		  font-size:30px;
+		  text-align:center;
+		  background-color: #f2dede;
+		  border: 1px solid rgba(185, 74, 72, 0.3);
+		  -webkit-border-radius: 4px;
+			 -moz-border-radius: 4px;
+				  border-radius: 4px;
+		  margin-top:20px;
+		}
+		
+		
+		ul{
+			margin: 0.5rem 0 1rem 0;
+			border: 1px solid #e0e0e0;
+			border-radius: 2px;
+			overflow: hidden;
+			position: relative;
+			padding: 0;
+			list-style-type: none;
+		}
+		
+		ul li{
+			background-color: #fff;
+			line-height: 1.5rem;
+			padding: 10px 20px;
+			margin: 0;
+			border-bottom: 1px solid #e0e0e0;
+			display: flex;
+			list-style-type: none;
+			align-items: center;
+		}
+		
+		.flex-item{
+			flex:1;
+			
+		}
+		
+		.main{
+			flex:3;
+			font-size:20px;
+			line-height:30px;
+		}
+		
+		.plus{
+			color:#57BD91;
+			flex:2;
+			font-size:20px;
+			line-height:30px;
+		}
+		
+		@media (max-width: 1203px) AND (min-width:991px) {
+			.flex-item label{
+				
+			}
+			.flex-item.main, .flex-item.plus{
+				font-size:18px;
+			}
+			
+			.success, .error {
+				font-size:24px;
+			}
+		}
+		
+		@media (max-width: 991px)AND (min-width:700px) {
+			.flex-item label{
+				
+			}
+			.flex-item.main, .flex-item.plus{
+				font-size:16px;
+				
+			}
+			
+			.main{
+				flex2;
+			}
+			
+			.success, .error {
+				font-size:22px;
+			}
+		}
+		
+		@media (max-width: 700px) AND (min-width:535px){
+			.flex-item label{
+				font-size:12px;
+			}
+			.flex-item.main, .flex-item.plus{
+				font-size:14px;
+				
+			}
+			
+			.success, .error {
+				font-size:20px;
+			}
+			
+		}
+		
+		@media (max-width: 535px) AND (min-width:469px){
+			.flex-item label{
+				font-size:10px;
+			}
+			.flex-item.main, .flex-item.plus{
+				font-size:12px;
+				
+			}
+			
+			.success, .error {
+				font-size:18px;
+			}
+			
+		}
+		
+		@media (max-width: 469px){
+			.flex-item label{
+				font-size:8px;
+			}
+			
+			.flex-item.main, .flex-item.plus{
+				font-size:12px;
+				
+			}
+			
+			.success, .error {
+				font-size:16px;
+			}
+			
+			
+		}
+    
+	
+   </style>
+
+</head>
+<body>
+
+<div class="container">
+
+<div class="row">
+	<div class = "col-md-12 text-center margin-top-50">
+		<h2> How much do you do to help sea turtles and other marine animals? </h2> 
+		<p> ** Green indicates bonus points as they are actions you actively take to protect turtles </p>
+	</div>
+</div>
+
+<form id="form" class="margin-top-50">
+      <ul>
+        <li>
+        	<span class="flex-item main">Refuse plastic bags</span>
+        	<div class="flex-item">
+        		<label for="bag-always">Always</label>
+        		<input id="bag-always" name="bag" type="radio" value="0" required>
+        	</div>
+        	<div class="flex-item">
+        		<label for="bag-sometimes">Sometimes</label>
+        		<input id="bag-sometimes" name="bag" type="radio" value="6.82" required>
+        	</div>
+        	<div class="flex-item">
+        		<label for="bag-never">Never</label>
+        		<input id="bag-never" name="bag" type="radio" value="13.63" required>
+        	</div>
+        </li>
+        <li>
+        	<span class="flex-item main">Avoid using straws or bring your own straws</span>
+        	<div class="flex-item">
+        		<label for="straw-always">Always</label>
+        		<input id="straw-always" name="straw" type="radio" value="0" required>
+        	</div>
+        	<div class="flex-item">
+        		<label for="straw-sometimes">Sometimes</label>
+        		<input id="straw-sometimes" name="straw" type="radio" value="2.27" required>
+        	</div>
+        	<div class="flex-item">
+        		<label for="straw-never">Never</label>
+        		<input id="straw-never" name="straw" type="radio" value="4.55" required>
+        	</div>
+        </li>
+         <li>
+        	<span class="flex-item main">Bring your own utensils (instead of using one-time use plastic utensils)</span>
+        	<div class="flex-item">
+        		<label for="utensils-always">Always</label>
+        		<input id="utensils-always" name="utensils" type="radio" value="0" required>
+        	</div>
+        	<div class="flex-item">
+        		<label for="utensils-sometimes">Sometimes</label>
+        		<input id="utensils-sometimes" name="utensils" type="radio" value="4.55" required>
+        	</div>
+        	<div class="flex-item">
+        		<label for="utensils-never">Never</label>
+        		<input id="utensils-never" name="utensils" type="radio" value="9.09" required>
+        	</div>
+        </li>
+         <li>
+        	<span class="flex-item main">Use reusable water bottles (instead of using PET bottles)</span>
+        	<div class="flex-item">
+        		<label for="bottles-always">Always</label>
+        		<input id="bottles-always" name="bottles" type="radio" value="0" required>
+        	</div>
+        	<div class="flex-item">
+        		<label for="bottles-sometimes">Sometimes</label>
+        		<input id="bottles-sometimes" name="bottles" type="radio" value="6.81" required>
+        	</div>
+        	<div class="flex-item">
+        		<label for="bottles-never">Never</label>
+        		<input id="bottles-never" name="bottles" type="radio" value="13.63" required>
+        	</div>
+        </li>
+         <li>
+        	<span class="flex-item main">Avoid buying balloons</span>
+        	<div class="flex-item">
+        		<label for="balloons-always">Always</label>
+        		<input id="balloons-always" name="balloons" type="radio" value="0" required>
+        	</div>
+        	<div class="flex-item">
+        		<label for="balloons-sometimes">Sometimes</label>
+        		<input id="balloons-sometimes" name="balloons" type="radio" value="6.81" required>
+        	</div>
+        	<div class="flex-item">
+        		<label for="balloons-never">Never</label>
+        		<input id="balloons-never" name="balloons" type="radio" value="13.63" required>
+        	</div>
+        </li>
+        <li>
+        	<span class="flex-item main">Bike / use public transport (instead of driving)</span>
+        	<div class="flex-item">
+        		<label for="transport-always">Always</label>
+        		<input id="transport-always" name="transport" type="radio" value="0" required>
+        	</div>
+        	<div class="flex-item">
+        		<label for="transport-sometimes">Sometimes</label>
+        		<input id="transport-sometimes" name="transport" type="radio" value="4.55" required>
+        	</div>
+        	<div class="flex-item">
+        		<label for="transport-never">Never</label>
+        		<input id="transport-never" name="transport" type="radio" value="9.09" required>
+        	</div>
+        </li>
+        <li>
+        	<span class="flex-item main">Eat sustainable seafood and know where they come from</span>
+        	<div class="flex-item">
+        		<label for="food-always">Always</label>
+        		<input id="food-always" name="food" type="radio" value="0" required>
+        	</div>
+        	<div class="flex-item">
+        		<label for="food-sometimes">Sometimes</label>
+        		<input id="food-sometimes" name="food" type="radio" value="4.55" required>
+        	</div>
+        	<div class="flex-item">
+        		<label for="food-never">Never</label>
+        		<input id="food-never" name="food" type="radio" value="9.09" required>
+        	</div>
+        </li>
+        <li>
+        	<span class="flex-item main">Use matches instead of lighters</span>
+        	<div class="flex-item">
+        		<label for="matches-always">Always</label>
+        		<input id="matches-always" name="matches" type="radio" value="0" required>
+        	</div>
+        	<div class="flex-item">
+        		<label for="matches-sometimes">Sometimes</label>
+        		<input id="matches-sometimes" name="matches" type="radio" value="2.27" required>
+        	</div>
+        	<div class="flex-item">
+        		<label for="matches-never">Never</label>
+        		<input id="matches-never" name="matches" type="radio" value="4.55" required>
+        	</div>
+        </li>
+        <li>
+        	<span class="flex-item main">Reduce use of chemicals (Or find biodegradable alternatives)</span>
+        	<div class="flex-item">
+        		<label for="chemicals-always">Always</label>
+        		<input id="chemicals-always" name="chemicals" type="radio" value="0" required>
+        	</div>
+        	<div class="flex-item">
+        		<label for="chemicals-sometimes">Sometimes</label>
+        		<input id="chemicals-sometimes" name="chemicals" type="radio" value="2.27" required>
+        	</div>
+        	<div class="flex-item">
+        		<label for="chemicals-never">Never</label>
+        		<input id="chemicals-never" name="chemicals" type="radio" value="4.55" required>
+        	</div>
+        </li>
+        <li>
+        	<span class="flex-item main">Avoid fires on nesting beaches</span>
+        	<div class="flex-item">
+        		<label for="fires-always">Always</label>
+        		<input id="fires-always" name="fires" type="radio" value="0" required>
+        	</div>
+        	<div class="flex-item">
+        		<label for="fires-sometimes">Sometimes</label>
+        		<input id="fires-sometimes" name="fires" type="radio" value="4.55" required>
+        	</div>
+        	<div class="flex-item">
+        		<label for="fires-never">Never</label>
+        		<input id="fires-never" name="fires" type="radio" value="9.09" required>
+        	</div>
+        </li>
+        <li>
+        	<span class="flex-item main">Avoid taking planes</span>
+        	<div class="flex-item">
+        		<label for="planes-always">Always</label>
+        		<input id="planes-always" name="planes" type="radio" value="0" required>
+        	</div>
+        	<div class="flex-item">
+        		<label for="planes-sometimes">Sometimes</label>
+        		<input id="planes-sometimes" name="planes" type="radio" value="2.27" required>
+        	</div>
+        	<div class="flex-item">
+        		<label for="planes-never">Never</label>
+        		<input id="planes-never" name="planes" type="radio" value="4.55" required>
+        	</div>
+        </li>
+        <li>
+        	<span class="flex-item main">Avoid using beach furniture</span>
+        	<div class="flex-item">
+        		<label for="furniture-always">Always</label>
+        		<input id="furniture-always" name="furniture" type="radio" value="0" required>
+        	</div>
+        	<div class="flex-item">
+        		<label for="furniture-sometimes">Sometimes</label>
+        		<input id="furniture-sometimes" name="furniture" type="radio" value="2.27" required>
+        	</div>
+        	<div class="flex-item">
+        		<label for="furniture-never">Never</label>
+        		<input id="furniture-never" name="furniture" type="radio" value="4.55" required>
+        	</div>
+        </li>
+        <li>
+        	<span class="flex-item plus">Clean beaches (while walking on beach or while diving / snorkeling)</span>
+        	<div class="flex-item">
+        		<label for="beaches-yes">Yes</label>
+        		<input class="bonus" id="beaches-yes" name="beaches" type="radio" value="9.09">
+        	</div>
+        	<div class="flex-item">
+        		<label for="beaches-no">No</label>
+        		<input class="bonus" id="beaches-no" name="beaches" type="radio" value="0">
+        	</div>
+        </li>
+        <li>
+        	<span class="flex-item plus">Conduct turtle surveys or submit sighting data</span>
+        	<div class="flex-item">
+        		<label for="surveys-yes">Yes</label>
+        		<input class="bonus" id="surveys-yes" name="surveys" type="radio" value="9.09">
+        	</div>
+        	<div class="flex-item">
+        		<label for="surveys-no">No</label>
+        		<input class="bonus" id="surveys-no" name="surveys" type="radio" value="0">
+        	</div>
+        </li>
+        <li>
+        	<span class="flex-item plus">Spread awareness or educate people about turtle conservation</span>
+        	<div class="flex-item">
+        		<label for="educate-yes">Yes</label>
+        		<input class="bonus" id="educate-yes" name="educate" type="radio" value="9.09">
+        	</div>
+        	<div class="flex-item">
+        		<label for="educate-no">No</label>
+        		<input class="bonus" id="educate-no" name="educate" type="radio" value="0">
+        	</div>
+        </li>
+        <li>
+        	<span class="flex-item plus">Report if you see things made of turtle shell or discourage people from eating eggs</span>
+        	<div class="flex-item">
+        		<label for="eggs-yes">Yes</label>
+        		<input class="bonus" id="eggs-yes" name="eggs" type="radio" value="9.09">
+        	</div>
+        	<div class="flex-item">
+        		<label for="eggs-no">No</label>
+        		<input class="bonus" id="eggs-no" name="eggs" type="radio" value="0">
+        	</div>
+        </li>
+	</ul>
+	<div class="field">
+        <button id="submit" type="submit">See your score</button>
+    </div>
+</form>
+    
+    <div id="your-score">
+
+    </div>
+</div>
+    
+
+    
+    <!-- jQuery -->
+    <script src="js/libraries/jquery.js"></script>
+    
+     <!-- jQuery -->
+    <script src="js/libraries/scroll.js"></script>
+
+	 <!-- underscore -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/libraries/bootstrap.min.js"></script>
+    
+
+	<script>
+	
+	$("#form").submit(function(event){
+	
+		var score = 100;
+	
+		event.preventDefault();
+		var $ul = $("#form").find('ul');
+		
+		$("input:checked").not(".bonus").each(function(){
+			score-=parseFloat($(this).val(),10);
+		});
+		
+		$("input:checked.bonus").each(function(){
+			score+=parseFloat($(this).val(),10);
+		});
+		
+		console.log(score);
+		
+		var finalScore = Math.round(score);
+		
+		if(finalScore >=95){
+			$("#your-score").removeClass('error').addClass("success");
+			$("#your-score").text(finalScore+"%! You are awesome!");
+		}else if (finalScore<95 && finalScore>=80){
+			$("#your-score").removeClass('error').addClass("success");
+			$("#your-score").text(finalScore+"%! You are actually saving turtles!");
+		}else if (finalScore<80 && finalScore>=60){
+			$("#your-score").removeClass('error').addClass("success");
+			$("#your-score").text(finalScore+"%. You are at a neutral position here, try harder to actually save turtles.");
+		}else if (finalScore<60 && finalScore>=40){
+			$("#your-score").removeClass('success').addClass("error");
+			$("#your-score").text(finalScore+"%. You are having a negative impact on sea turtles.");
+		}else{
+			$("#your-score").removeClass('success').addClass("error");
+			$("#your-score").text(finalScore+"%. You are contributing to sea turtle extinction :(");
+		}
+		
+		$('html, body').animate({
+				scrollTop: $("#your-score").offset().top
+		}, 500);
+		
+		
+	
+	});
+	
+	
+
+
+	
+
+	</script>
+	
+
+<footer>
+	
+</footer>
+
+
+</body>
+
+</html>
